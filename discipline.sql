@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2019 at 07:01 PM
+-- Generation Time: Aug 27, 2019 at 07:36 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -148,6 +148,44 @@ INSERT INTO `teacher` (`user_id`, `qualification`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `todo`
+--
+
+CREATE TABLE `todo` (
+  `taskId` int(11) NOT NULL,
+  `user` varchar(64) NOT NULL,
+  `task` varchar(300) NOT NULL,
+  `date` date NOT NULL,
+  `fromTime` time NOT NULL,
+  `toTime` time NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `todo`
+--
+
+INSERT INTO `todo` (`taskId`, `user`, `task`, `date`, `fromTime`, `toTime`, `status`) VALUES
+(1, 'shivam', 'shivam', '0000-00-00', '00:58:00', '23:58:00', 0),
+(2, 'lav', 'lav', '2019-08-27', '12:58:00', '12:58:00', 0),
+(3, 'lav1', 'lav1', '2019-08-27', '23:59:00', '12:59:00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `uploaded`
+--
+
+CREATE TABLE `uploaded` (
+  `uploadedId` int(11) NOT NULL,
+  `taskId` int(11) NOT NULL,
+  `fileName` varchar(64) NOT NULL,
+  `todayDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -217,6 +255,19 @@ ALTER TABLE `teacher`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `todo`
+--
+ALTER TABLE `todo`
+  ADD PRIMARY KEY (`taskId`);
+
+--
+-- Indexes for table `uploaded`
+--
+ALTER TABLE `uploaded`
+  ADD PRIMARY KEY (`uploadedId`),
+  ADD UNIQUE KEY `taskId` (`taskId`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -247,6 +298,18 @@ ALTER TABLE `subscription`
 --
 ALTER TABLE `teacher`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `todo`
+--
+ALTER TABLE `todo`
+  MODIFY `taskId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `uploaded`
+--
+ALTER TABLE `uploaded`
+  MODIFY `uploadedId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
