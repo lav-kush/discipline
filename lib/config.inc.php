@@ -9,6 +9,7 @@
     define('CSS_PATH', SITE_ROOT.'css/');
     define('IMAGE_PATH', SITE_ROOT.'images/');
     define('BANNER_PATH', SITE_ROOT.'images/banner/');
+    define('UPLOAD_IMG_PATH', 'images/upload/');
     define('BANNER_IMG_PATH', 'images/banner/');
     define('PROBLEM_PATH', ROOT.'problem/');
     define('SAMPLE_TESTCASE_PATH', ROOT.'testcase/sample/');
