@@ -1,4 +1,4 @@
-<div class="w3-panel w3-card-2 w3-light-grey" style="float:left; width: 80%"  id="admin-panel">
+<div class="w3-panel w3-card-2 w3-light-grey"  id="todo-panel">
 	<div class="container-fluid w3-light-grey" id="latestNoticeDiv">
 		<h2 class="w3-text-blue w3-myfont"><b>ToDo Panel</b></h2><br/>
          </div>
