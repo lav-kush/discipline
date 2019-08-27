@@ -28,7 +28,7 @@
         }
         function toppers_view_icar() {
             loadView('header', array_merge($this->data, ['title' => 'About_us - Discipline']));
-            loadView('about_us_sidebar');
+            // loadView('about_us_sidebar');
             loadView('about_us_icar_result_2018');
             loadView('footer');
         }
