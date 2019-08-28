@@ -27,6 +27,7 @@
     <h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
     <table class="row">
       <tr class="column" style="border: 1px solid black;background: white;">
+        <th>TaskId</th>
         <th>Task</th>
         <th>From Time</th>
         <th>To Time</th>
@@ -38,11 +39,13 @@
       $x = "num_".$i;
       ?>
       <form action="<?php echo(generate_link('todo', 'disable_todo')); ?>" method="post">
+
         <?php if(${$x}['status'] == 0){ ?>
         <tr class="column w3-light-blue w3-border w3-large">
           <?php }else{ ?>
             <tr class="w3-light-gray w3-border w3-large">
           <?php  }?>
+          <td style="border: 1px solid #ddd;"><?php echo(${$x}['taskId']); ?></td>
            <td style="border: 1px solid #ddd;"><?php echo(${$x}['task']); ?></td>
           <td style="border: 1px solid #ddd;"><?php echo(${$x}['fromTime']); ?></td>
            <td style="border: 1px solid #ddd;"><?php echo(${$x}['toTime']); ?></td>
@@ -59,13 +62,30 @@
       $i++;
     } ?>
 
+<form action="<?php echo(generate_link('todo', 'upload_assignment')); ?>" method="post" enctype="multipart/form-data">
+      <table style="width: 100%">
+      <tr> <td>TaskId</td><td>Select image to upload</td><td></td>
+      </tr>
+      <tr>
+        <td><input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='TaskId' placeholder='TaskId'  required></td>
+        <td>
+          <input type="file" name="fileToUpload" id="fileToUpload">
+          </td>
+        <td>
+          <input class="w3-button w3-blue w3-xlarge w3-hover-cyan w3-ripple w3-round" type="submit" value="Upload Image" name="submit"></tr>
+            </td>  
+      </tr></table>
+    </form>
 
-<form action="uploader" method="post" enctype="multipart/form-data">
+
+
+
+<!-- <form action="uploader" method="post" enctype="multipart/form-data">
     <table>
     <tr>Select image to upload:    <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit"></tr>
       </table>
-</form>
+</form> -->
 </div>
 <script type="text/javascript">
  // function isUserCorrect(){
