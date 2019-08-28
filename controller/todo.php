@@ -41,9 +41,10 @@
         }
 
          function upload_assignment($arguments) {
-            $result = loadModel('todo', 'upload_assignment', $arguments);
             $result1 = loadModel('todo', 'save_file', $arguments);
-            if ($result === false) {
+            $result = loadModel('todo', 'upload_assignment', $arguments);
+            
+            if ($result === false && result1 == false) {
                 print('Some Error Occured<br/>Please Try Again');
                 loadView('error', ['msg' => 'Some Error Occured']);
                 exit();
