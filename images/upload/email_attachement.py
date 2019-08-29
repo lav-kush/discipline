@@ -1,8 +1,12 @@
+import sys
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import smtplib
 import mimetypes
 import email.mime.application
+
+argList = sys.argv
+print("image file name : "+argList[1])
 
 smtp_ssl_host = 'smtp.googlemail.com'  # smtp.mail.yahoo.com
 smtp_ssl_port = 465
@@ -13,13 +17,16 @@ s.login(email_user, email_pass)
 print('login to email successfull!')
 
 msg = MIMEMultipart()
-msg['Subject'] = 'I have a picture'
+msg['Subject'] = 'Assignment - Auto generated mail'
 msg['From'] = email_user
 msg['To'] = email_user
-txt = MIMEText('I just bought a new camera.')
+f = open("temp.txt", "r")
+contents = f.read()
+txt = MIMEText(contents)
+f.close()
 msg.attach(txt)
 
-filename = 'lav_kush.jpg' #path to file
+filename = argList[1] #path to file
 fo=open(filename,'rb')
 attach = email.mime.application.MIMEApplication(fo.read(),_subtype="jpg")
 fo.close()
