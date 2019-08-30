@@ -10,7 +10,9 @@
 
         function add_todo($arguments) {
             mysqli_autocommit($this->db, TRUE);
-            $sql = "INSERT INTO `todo`(`user`, `task`, `date`, `fromTime`, `toTime`, `status`) VALUES('".$arguments['user']."', '".$arguments['task']."', '".$arguments['date']."', '".$arguments['fromTime']."', '".$arguments['toTime']."', '0')";
+           echo($arguments);
+            $sql = "INSERT INTO `todo`(`user`, `task`, `date`, `fromTime`, `toTime`, `status`) VALUES('".$arguments['user']."', '".$arguments['task']."', '".$arguments['taskDate']."', '".$arguments['fromTime']."', '".$arguments['toTime']."', '0')";
+            echo($arguments['taskDate']);
             $result = query($this->db,$sql);
             db_close($this->db);
             echo($result);
@@ -25,18 +27,18 @@
         }
 
         function fetch_today_complete_todos(){
-            $date = date("Y/m/d");
+            $todayDate = date("Y-m-d");
             mysqli_autocommit($this->db, TRUE);
-            $sql = "SELECT * FROM `todo` WHERE status='1' AND date >= $date"  ;
+            $sql = "SELECT * FROM `todo` WHERE status='1' AND date = '".$todayDate."' "  ;
             $result = query($this->db, $sql); 
             mysqli_commit($this->db);
             db_close($this->db);
             return $result;
-        }        
+        }
 
         function fetch_todo(){
             mysqli_autocommit($this->db, TRUE);
-            $sql = "SELECT * FROM `todo` WHERE status='0'" ;
+            $sql = "SELECT * FROM `todo` WHERE status='0' ORDER BY `user`" ;
             $result = query($this->db, $sql); 
             mysqli_commit($this->db);
             db_close($this->db);
@@ -54,7 +56,7 @@
         function upload_assignment($arguments){
             $fileName =  explode(" ", implode(" ", $arguments['fileToUpload']))[0];
             mysqli_autocommit($this->db, TRUE);
-            $sql = "INSERT INTO `uploaded`(`taskId`, `fileName`, `todayDate`) VALUES('".$arguments['taskId']."', '".$fileName."', '".$arguments['todayDate']."')";
+            $sql = "INSERT INTO `uploaded`(`taskId`, `fileName`, `todayDate`, `anyNotes`) VALUES('".$arguments['taskId']."', '".$fileName."', '".$arguments['todayDate']."',  '".$arguments['anyNotes']."')";
             $result = query($this->db,$sql);
             db_close($this->db);
             if($result === false) {
