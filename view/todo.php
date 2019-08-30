@@ -10,7 +10,7 @@
         <td><input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='user' id="user" onchange="isUserCorrect()" placeholder='user'  required></td>
         <td><input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='task' onchange="isTaskEntered()" id="task" placeholder='task' required></td>
         <td>
-          <input class="w3-input w3-border w3-xlarge" style="display: inline" value="<?php echo date("Y/m/d")?>" name='date' placeholder='date'  disabled>
+          <input class="w3-input w3-border w3-xlarge" style="display: inline" value="<?php echo date("Y/m/d")?>" id = "taskDate"  name='taskDate' placeholder='date' readonly>
             </td>  
       </tr></table>
        From Time: <input class="w3-input w3-border w3-xlarge" type="time" style="width: 33%; display: inline" id="fromTime" name='fromTime' placeholder='fromTime'  required>
@@ -23,12 +23,25 @@
    </div>
  </div>
 <br/><br/>
+
+<div style="display: flex;">
+  <div  style="flex: 50%;background-color:#aaa;">
+    <h2>Shivam Todos</h2>
+    <p>Some text..</p>
+  </div>
+  <div  style="flex: 50%;background-color:#bbb;">
+    <h2>Lav Todos</h2>
+    <p>Some text..</p>
+  </div>
+</div>
+
 <div id="todoListDiv">
     <h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
     <table >
       <tr style="border: 1px solid black;background: white;">
         <th>TaskId</th>
         <th>Task</th>
+        <th>Date</th>
         <th>From Time</th>
         <th>To Time</th>
         <th></th>
@@ -50,6 +63,7 @@
           <td class="w3-center" style="border: 1px solid #ddd;" > <?php echo(${$x}['taskId']); ?>
           </td>
            <td style="border: 1px solid #ddd;"><?php echo(${$x}['task']); ?></td>
+           <td style="border: 1px solid #ddd;"><?php echo(${$x}['date']); ?></td>
           <td style="border: 1px solid #ddd;"><?php echo(${$x}['fromTime']); ?></td>
            <td style="border: 1px solid #ddd;"><?php echo(${$x}['toTime']); ?></td>
         <td>
@@ -71,7 +85,7 @@
       <table style="width: 100%"><br/ >
         <input type="hidden" name="todayDate" value="<?php echo date("Y/m/d")?>">
       <h2>Assignment submission</h2>
-      <tr> <td>TaskId</td><td>Select image to upload</td><td></td>
+      <tr> <th>TaskId</th><th>Select image to upload</th><th>Any Other  Notes</th><th><th>
       </tr>
       <tr>
         <td>
@@ -91,9 +105,10 @@
         <td>
           <input type="file" name="fileToUpload" id="fileToUpload">
           </td>
+         <td>  <textarea rows="4" cols="50" name="anyNotes"></textarea> </td>
         <td>
           <input class="w3-button w3-blue w3-xlarge w3-hover-cyan w3-ripple w3-round" type="submit" value="Upload Image" name="submit">
-            </td>  
+            </td>
       </tr>
     </table>
     </form>
@@ -118,7 +133,6 @@
     return true;
   }
 function isTimeCorrect() {
-  alert(document.getElementById('user').value=='');
   $fromTime = document.getElementById("fromTime").value;
   $toTime = document.getElementById("toTime").value;
   if ($toTime >= $fromTime){

@@ -41,15 +41,15 @@
         }
 
          function upload_assignment($arguments) {
-            $result1 = loadModel('todo', 'save_file', $arguments);
-            $result = loadModel('todo', 'upload_assignment', $arguments);
+            $result = loadModel('todo', 'save_file', $arguments);
             
-            if ($result === false && result1 == false) {
+            if ($result == false) {
                 print('Some Error Occured<br/>Please Try Again');
-                loadView('error', ['msg' => 'Some Error Occured']);
-                exit();
+                redirect_sleep('todo', 'home', 4);
+               exit();
             }
-            redirect('todo', 'home');
+            $result = loadModel('todo', 'upload_assignment', $arguments);
+            redirect_sleep('todo', 'home', 3);
             exit();
         }
 
