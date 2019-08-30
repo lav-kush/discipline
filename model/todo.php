@@ -54,7 +54,7 @@
         }
         
         function upload_assignment($arguments){
-            $fileName =  explode(" ", implode(" ", $arguments['fileToUpload']))[0];
+            $fileName =  explode("~", implode("~", $arguments['fileToUpload']))[0];
             mysqli_autocommit($this->db, TRUE);
             $sql = "INSERT INTO `uploaded`(`taskId`, `fileName`, `todayDate`, `anyNotes`) VALUES('".$arguments['taskId']."', '".$fileName."', '".$arguments['todayDate']."',  '".$arguments['anyNotes']."')";
             $result = query($this->db,$sql);
