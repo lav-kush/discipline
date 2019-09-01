@@ -22,21 +22,11 @@
     <h4 class="w3-red w3-ripple"  style="display:none;" id="todoAddButtonError3" name='todoAddButtonError3' value="Enter Correct Time">Enter Corrrect Time</h4>
    </div>
  </div>
-<br/><br/>
-
+<hr>
+<h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
 <div style="display: flex;">
   <div  style="flex: 50%;background-color:#aaa;">
     <h2>Shivam Todos</h2>
-    <p>Some text..</p>
-  </div>
-  <div  style="flex: 50%;background-color:#bbb;">
-    <h2>Lav Todos</h2>
-    <p>Some text..</p>
-  </div>
-</div>
-
-<div id="todoListDiv">
-    <h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
     <table >
       <tr style="border: 1px solid black;background: white;">
         <th>TaskId</th>
@@ -49,7 +39,7 @@
     <?php
     $i = 0;
     $taskList = array();
-    while($i < $completedTodosLen + $todoLen) {  
+    while($i < $shivamCompletedTodosLen + $shivamTodoLen) {
       $x = "num_".$i;
       ?>
       <form action="<?php echo(generate_link('todo', 'disable_todo')); ?>" method="post">
@@ -79,43 +69,154 @@
       <?php
       $i++;
     } ?>
+  </table>
+  </div>
+  <div  style="flex: 50%;background-color:#bbb;">
+    <h2>Lav Todos</h2>
+    <table >
+      <tr style="border: 1px solid black;background: white;">
+        <th>TaskId</th>
+        <th>Task</th>
+        <th>Date</th>
+        <th>From Time</th>
+        <th>To Time</th>
+        <th></th>
+      </tr>
+    <?php
+    $i = $shivamCompletedTodosLen + $shivamTodoLen;
+    $taskList = array();
+    while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen) {
+      $x = "num_".$i;
+      ?>
+      <form action="<?php echo(generate_link('todo', 'disable_todo')); ?>" method="post">
+
+        <?php if(${$x}['status'] == 0){ array_push($taskList, ${$x}['taskId']);?>
+        <tr class="column w3-light-blue w3-border w3-large">
+          <?php }else{ ?>
+            <tr class="w3-light-gray w3-border w3-large">
+          <?php  }?>
+          <input type="hidden" name="taskIdDisable" value="<?php echo(${$x}['taskId']); ?>">
+          <td class="w3-center" style="border: 1px solid #ddd;" > <?php echo(${$x}['taskId']); ?>
+          </td>
+           <td style="border: 1px solid #ddd;"><?php echo(${$x}['task']); ?></td>
+           <td style="border: 1px solid #ddd;"><?php echo(${$x}['date']); ?></td>
+          <td style="border: 1px solid #ddd;"><?php echo(${$x}['fromTime']); ?></td>
+           <td style="border: 1px solid #ddd;"><?php echo(${$x}['toTime']); ?></td>
+        <td>
+          <?php if(${$x}['status'] == 0){ ?>
+            <input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" id="disableTodoButton" type='submit' name='disableTodo' value='Task Done'>
+          <?php }else{ ?>
+            Completed <?php }?>
+          </td>
+        </tr>
+      </tr>
+      </form>
+
+      <?php
+      $i++;
+    } ?>
+  </table>
+  </div>
 </div>
-<div>
-<form action="<?php echo(generate_link('todo', 'upload_assignment')); ?>" method="post" enctype="multipart/form-data">
-      <table style="width: 100%"><br/ >
-        <input type="hidden" name="todayDate" value="<?php echo date("Y/m/d")?>">
-      <h2>Assignment submission</h2>
-      <tr> <th>TaskId</th><th>Select image to upload</th><th>Any Other  Notes</th><th><th>
+<hr>
+<div id="assignment">
+    <h2 class="w3-text-blue w3-myfont w3-padding-16"><b>Assignment submission</b></h2>
+      <form action="<?php echo(generate_link('todo', 'upload_assignment')); ?>" method="post" enctype="multipart/form-data">
+      <table>
+      <tr class="w3-margin-bottom"> 
+        <th style="width: 9%">TaskId</th>
+        <th style="width: 19%">Select image to upload</th>
       </tr>
       <tr>
         <td>
-          <select class="w3-input w3-border w3-xlarge w3-border-black w3-round-large w3-center" name='taskId'>
-            <?php
-            $i = 0;
-            while($i < count($taskList)) {
-              ?>
-              <option class="w3-center" value="<?php echo $taskList[$i] ?>"><?php echo $taskList[$i] ?></option>
-            <?php 
-            $i++;
-          } ?>
-
+          <select style="width: 70%" class="w3-input w3-border w3-xlarge w3-border-black w3-round-large w3-center" name='taskId'>
+              <?php
+              $i = 0;
+              while($i < count($taskList)) {
+                ?>
+                <option class="w3-center" value="<?php echo $taskList[$i] ?>"><?php echo $taskList[$i] ?></option>
+              <?php 
+              $i++;
+            } ?>
           </select>
-          <!-- <input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='taskId' placeholder='taskId'  required> -->
         </td>
         <td>
           <input type="file" name="fileToUpload" id="fileToUpload">
-          </td>
-         <td>  <textarea rows="4" cols="50" name="anyNotes"></textarea> </td>
+        </td>
+      </tr>
+    </table>
+    <br/>
+    <table>
+      <tr>
+        <th>Any Other  Notes</th>
+        <th style="width: 20%"><th>
+      </tr>
+        <tr>
+         <td style="width: 40%">
+           <textarea rows="4" cols="32%" name="anyNotes"></textarea> </td>
         <td>
           <input class="w3-button w3-blue w3-xlarge w3-hover-cyan w3-ripple w3-round" type="submit" value="Upload Image" name="submit">
             </td>
       </tr>
-    </table>
+      <input type="hidden" name="todayDate" value="<?php echo date("Y/m/d")?>">
     </form>
+    </table> 
+</div>
+<hr>
+<br/>
+<?php 
+  $fileList = [];
+?>
+<div>
+  <h4> Send Assignment section </h4>
+  <input class="w3-quarter w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='admin' id="admin" onchange="isAdminCorrect()" placeholder='admin id'  required>
+    <div id="sendMailDiv" style="display: none;">
+       <select class="w3-quarter w3-input w3-border w3-xlarge w3-border-black w3-round-large w3-center" name='sendMailTaskId' id="sendMailTaskId" onchange="changeFileName()">
+              <?php
+              $i = $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen;
+              while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen + $uploadedAssignmentLen) {
+                $x = "num_".$i;
+                ?>
+                <option class="w3-center" value="<?php echo(${$x}['taskId']); ?>"><?php echo(${$x}['taskId']); ?></option>
+              <?php 
+              $fileList [ ${$x}['taskId'] ] = ${$x}['fileName'];
+              $i++;
+            } ?>
+          </select>
+          <input class="w3-quarter w3-input w3-border w3-xlarge" style="display: inline" value="" id = "fileName"  name='fileName' readonly>
+          <!-- <h3 class="w3-quarter" id="fileName">file  </h3> -->
+          <h3 class="w3-quarter" id="arrayUploadedAssignment" style="display: none;"> File Name: <?php echo $fileList; ?></h3>
+          <input class="w3-quarter w3-xlarge w3-button w3-blue w3-hover-cyan w3-ripple w3-round" id="disableTodoButton" type='submit' name='sendMailButton' value='Send Mail' onclick="sendMail()">
+    </div>
 </div>
 <br/><br/><br/>
 
+
 <script type="text/javascript">
+  var fileMap = JSON.parse('<?php echo json_encode($fileList); ?>');
+  function changeFileName(){
+    document.getElementById('fileName').value = "File Name: ".concat(fileMap[document.getElementById('sendMailTaskId').value]);
+  }
+  function sendMail(){
+    // path = UPLOAD_IMG_PATH;
+    // alert(path);
+    // var msg = "<?php echo  shell_exec("python ") ?>";
+    // alert(msg);
+    // var val = "<?php echo implode("~", array_values($fileList)); ?>".split("~");
+    // var temp= "<?php echo implode("~", array_keys($fileList)); ?>".split("~");
+    // alert( document.getElementById('sendMailTaskId').value)
+  }
+function isAdminCorrect(){
+    // alert("File Name: ".concat(fileMap[document.getElementById('sendMailTaskId').value]));
+    // alert("File Name: " + values[document.getElementById('sendMailTaskId').value]);
+    if(document.getElementById('admin').value == null || document.getElementById('admin').value=='' || !(document.getElementById('admin').value =='shivam' || document.getElementById('admin').value =='vishnu')){
+    document.getElementById('sendMailDiv').style.display = 'none';
+    return false;
+    }
+     document.getElementById('sendMailDiv').style.display = 'block';
+     document.getElementById('fileName').value = "File Name: ".concat(fileMap[document.getElementById('sendMailTaskId').value]);
+    return true;
+  }
  function isUserCorrect(){
     if(document.getElementById('user').value == null || document.getElementById('user').value=='' || !(document.getElementById('user').value =='shivam' || document.getElementById('user').value =='vishnu')){
     document.getElementById('todoAddButtonError1').style.display = 'block';

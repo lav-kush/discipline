@@ -29,8 +29,8 @@
         function fetch_today_complete_todos(){
             $todayDate = date("Y-m-d");
             mysqli_autocommit($this->db, TRUE);
-            $sql = "SELECT * FROM `todo` WHERE status='1' AND date = '".$todayDate."' "  ;
-            $result = query($this->db, $sql); 
+            $sql = "SELECT * FROM `todo` WHERE status='1' AND date = '".$todayDate."'  ORDER BY `user`"  ;
+            $result = query($this->db, $sql);
             mysqli_commit($this->db);
             db_close($this->db);
             return $result;
@@ -39,6 +39,14 @@
         function fetch_todo(){
             mysqli_autocommit($this->db, TRUE);
             $sql = "SELECT * FROM `todo` WHERE status='0' ORDER BY `user`" ;
+            $result = query($this->db, $sql); 
+            mysqli_commit($this->db);
+            db_close($this->db);
+            return $result;
+        }
+        function fetch_uploaded_assignment(){
+            mysqli_autocommit($this->db, TRUE);
+            $sql = "SELECT * FROM `uploaded`" ;
             $result = query($this->db, $sql); 
             mysqli_commit($this->db);
             db_close($this->db);

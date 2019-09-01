@@ -9,10 +9,33 @@
             }
         }
         function home() {
-           $data_todo= loadModel("todo", "fetch_todo");
-           $data_completed_todos= loadModel("todo", "fetch_today_complete_todos");
+            $data_completed_todos= loadModel("todo", "fetch_today_complete_todos");
+            $shivamCompletedTaskList = array();
+            $lavKushCompletedTaskList = array();
+            $i = 0;
+            while($i < count($data_completed_todos)) {
+                if($data_completed_todos[$i]['user'] == 'shivam'){
+                    array_push($shivamCompletedTaskList, $data_completed_todos[$i]);
+                }else{
+                    array_push($lavKushCompletedTaskList, $data_completed_todos[$i]);
+                }
+                $i = $i + 1;
+            }
+            $data_todo= loadModel("todo", "fetch_todo");
+            $shivamTaskList = array();
+            $lavKushTaskList = array();
+            $i = 0;
+            while($i < count($data_todo)) {
+                if($data_todo[$i]['user'] == 'shivam'){
+                    array_push($shivamTaskList, $data_todo[$i]);
+                }else{
+                    array_push($lavKushTaskList, $data_todo[$i]);
+                }
+                $i = $i + 1;
+            }
+            $data_uploaded_assignment= loadModel("todo", "fetch_uploaded_assignment");
            loadView('todos_header', array_merge($this->data, ['todoLen' => count($data_todo), 'title' => 'Todo - Discipline']));
-            loadView('todo', array_merge($data_completed_todos, $data_todo, ['completedTodosLen' => count($data_completed_todos), 'todoLen' => count($data_todo)]));
+            loadView('todo', array_merge($shivamCompletedTaskList, $shivamTaskList, $lavKushCompletedTaskList, $lavKushTaskList, $data_uploaded_assignment, ['shivamCompletedTodosLen' => count($shivamCompletedTaskList), 'lavCompletedTodosLen' => count($lavKushCompletedTaskList), 'shivamTodoLen' => count($shivamTaskList), 'lavTodoLen' => count($lavKushTaskList), 'uploadedAssignmentLen' => count($data_uploaded_assignment) ]));
             loadView('footer');
         }
         function uploader() {
@@ -49,7 +72,7 @@
                exit();
             }
             $result = loadModel('todo', 'upload_assignment', $arguments);
-            redirect_sleep('todo', 'home', 3);
+            redirect('todo', 'home');
             exit();
         }
 
