@@ -24,8 +24,8 @@
  </div>
 <hr>
 <h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
-<div style="display: flex;">
-  <div  style="flex: 50%;background-color:#aaa;">
+<div style="width: auto;">
+  <div  style="background-color:#aaa;">
     <h2>Shivam Todos</h2>
     <table >
       <tr style="border: 1px solid black;background: white;">
@@ -71,7 +71,7 @@
     } ?>
   </table>
   </div>
-  <div  style="flex: 50%;background-color:#bbb;">
+  <div  style="background-color:#bbb;">
     <h2>Lav Todos</h2>
     <table >
       <tr style="border: 1px solid black;background: white;">
