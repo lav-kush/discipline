@@ -140,5 +140,15 @@
             db_close($this->db);
             return $result;
         }
+        function fetch_today_mcq(){
+            $todayDate = date("Y-m-d");
+            mysqli_autocommit($this->db, TRUE);
+            $sql = "SELECT * FROM `mcq_q` AS ques inner join `mcq` as test WHERE  test.status = 0 and test.date = '".$todayDate."'";
+            $result = query($this->db, $sql);
+            mysqli_commit($this->db);
+            db_close($this->db);
+            return $result;
+        }
+
     }
 ?>

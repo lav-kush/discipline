@@ -22,6 +22,8 @@
                 $i = $i + 1;
             }
             $data_todo= loadModel("todo", "fetch_todo");
+            $data_mcq= loadModel("todo", "fetch_today_mcq");
+
             $shivamTaskList = array();
             $lavKushTaskList = array();
             $i = 0;
@@ -35,7 +37,7 @@
             }
             $data_uploaded_assignment= loadModel("todo", "fetch_uploaded_assignment");
            loadView('todos_header', array_merge($this->data, ['todoLen' => count($data_todo), 'title' => 'Todo - Discipline']));
-            loadView('todo', array_merge($shivamCompletedTaskList, $shivamTaskList, $lavKushCompletedTaskList, $lavKushTaskList, $data_uploaded_assignment, ['shivamCompletedTodosLen' => count($shivamCompletedTaskList), 'lavCompletedTodosLen' => count($lavKushCompletedTaskList), 'shivamTodoLen' => count($shivamTaskList), 'lavTodoLen' => count($lavKushTaskList), 'uploadedAssignmentLen' => count($data_uploaded_assignment) ]));
+            loadView('todo', array_merge($shivamCompletedTaskList, $shivamTaskList, $lavKushCompletedTaskList, $lavKushTaskList, $data_mcq, $data_uploaded_assignment, ['shivamCompletedTodosLen' => count($shivamCompletedTaskList), 'lavCompletedTodosLen' => count($lavKushCompletedTaskList), 'shivamTodoLen' => count($shivamTaskList), 'lavTodoLen' => count($lavKushTaskList), 'uploadedAssignmentLen' => count($data_uploaded_assignment), 'mcqLen' => count($data_mcq) ]));
             loadView('footer');
         }
         function uploader() {
@@ -68,14 +70,12 @@
             
             if ($result == false) {
                 print('Some Error Occured<br/>Please Try Again');
-                redirect_sleep('todo', 'home', 4);
+                redirect_sleep('todo', 'home', 3);
                exit();
             }
             $result = loadModel('todo', 'upload_assignment', $arguments);
             redirect('todo', 'home');
             exit();
         }
-
-
     }
 ?>

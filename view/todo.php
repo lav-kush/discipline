@@ -3,7 +3,7 @@
 		<h2 class="w3-text-blue w3-myfont"><b>ToDo Panel</b></h2><br/>
 
       <form action="<?php echo(generate_link('todo', 'add_todo')); ?>" method="post">
-       <p><label>User Name</labe>
+       <p><label>User Name</label>
 		<input class="w3-mobile w3-input w3-border w3-xlarge w3-border-black w3-round-large" style="width:auto" type='text'  id="user" onchange="isUserCorrect()" placeholder='user'  required>
         </p><br/>
        <p><label>Task</label>
@@ -27,18 +27,10 @@
  </div>
 <hr>
 <h2 class="w3-text-blue w3-myfont"><b>Todo List</b></h2>
-<div style="width: auto;">
-  <div  style="background-color:#aaa;">
+
+
+<div  style="background-color:#aaa;">
     <h2>Shivam Todos</h2>
-    <table >
-      <tr style="border: 1px solid black;background: white;">
-        <th>TaskId</th>
-        <th>Task</th>
-        <th>Date</th>
-        <th>From Time</th>
-        <th>To Time</th>
-        <th></th>
-      </tr>
     <?php
     $i = 0;
     $taskList = array();
@@ -46,65 +38,34 @@
       $x = "num_".$i;
       ?>
       <form action="<?php echo(generate_link('todo', 'disable_todo')); ?>" method="post">
-
         <?php if(${$x}['status'] == 0){ array_push($taskList, ${$x}['taskId']);?>
-        <tr class="column w3-light-blue w3-border w3-large">
+        <div class="w3-row w3-light-blue w3-border  w3-large">
           <?php }else{ ?>
-            <tr class="w3-light-gray w3-border w3-large">
+              <div class="w3-row w3-light-gray w3-border">
           <?php  }?>
           <input type="hidden" name="taskIdDisable" value="<?php echo(${$x}['taskId']); ?>">
-          <td class="w3-center" style="border: 1px solid #ddd;" > <?php echo(${$x}['taskId']); ?>
-          </td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['task']); ?></td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['date']); ?></td>
-          <td style="border: 1px solid #ddd;"><?php echo(${$x}['fromTime']); ?></td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['toTime']); ?></td>
-        <td>
+          <div class="w3-col w3-container m2 l2">    <p>TaskId: <?php echo(${$x}['taskId']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>Task: <?php echo(${$x}['task']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>Date: <?php echo(${$x}['date']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>From Time: <?php echo(${$x}['fromTime']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>To Time: <?php echo(${$x}['toTime']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">
           <?php if(${$x}['status'] == 0){ ?>
             <input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" id="disableTodoButton" type='submit' name='disableTodo' value='Task Done'>
           <?php }else{ ?>
             Completed <?php }?>
-          </td>
-        </tr>
-      </tr>
+          </div>
+        </div>
+      </div>
       </form>
 
       <?php
       $i++;
     } ?>
-  </table>
   </div>
-<div class="w3-row">
-  <div class="w3-col w3-container m2 l2 w3-yellow">
-    <p>This part .</p>
-  </div>
-  <div class="w3-col w3-container m2 l2">  
-    <p>This part</p>
-  </div>
-  <div class="w3-col w3-container m2 l2 w3-yellow">
-    <p>This .</p>
-  </div>
-  <div class="w3-col w3-container m2 l2">  
-    <p>This </p>
-  </div>
-  <div class="w3-col w3-container m2 l2 w3-yellow">
-    <p>This part .</p>
-  </div>
-  <div class="w3-col w3-container m2 l2">  
-    <p>This part</p>
-  </div>
-</div>
+
   <div  style="background-color:#bbb;">
     <h2>Lav Todos</h2>
-    <table >
-      <tr style="border: 1px solid black;background: white;">
-        <th>TaskId</th>
-        <th>Task</th>
-        <th>Date</th>
-        <th>From Time</th>
-        <th>To Time</th>
-        <th></th>
-      </tr>
     <?php
     $i = $shivamCompletedTodosLen + $shivamTodoLen;
     $taskList = array();
@@ -112,46 +73,36 @@
       $x = "num_".$i;
       ?>
       <form action="<?php echo(generate_link('todo', 'disable_todo')); ?>" method="post">
-
         <?php if(${$x}['status'] == 0){ array_push($taskList, ${$x}['taskId']);?>
-        <tr class="column w3-light-blue w3-border w3-large">
+        <div class="w3-row w3-light-blue w3-border  w3-large">
           <?php }else{ ?>
-            <tr class="w3-light-gray w3-border w3-large">
+              <div class="w3-row w3-light-gray w3-border">
           <?php  }?>
           <input type="hidden" name="taskIdDisable" value="<?php echo(${$x}['taskId']); ?>">
-          <td class="w3-center" style="border: 1px solid #ddd;" > <?php echo(${$x}['taskId']); ?>
-          </td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['task']); ?></td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['date']); ?></td>
-          <td style="border: 1px solid #ddd;"><?php echo(${$x}['fromTime']); ?></td>
-           <td style="border: 1px solid #ddd;"><?php echo(${$x}['toTime']); ?></td>
-        <td>
+          <div class="w3-col w3-container m2 l2">    <p>TaskId: <?php echo(${$x}['taskId']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>Task: <?php echo(${$x}['task']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>Date: <?php echo(${$x}['date']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>From Time: <?php echo(${$x}['fromTime']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">    <p>To Time: <?php echo(${$x}['toTime']); ?></p>     </div>
+          <div class="w3-col w3-container m2 l2">
           <?php if(${$x}['status'] == 0){ ?>
             <input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" id="disableTodoButton" type='submit' name='disableTodo' value='Task Done'>
           <?php }else{ ?>
             Completed <?php }?>
-          </td>
-        </tr>
-      </tr>
+          </div>
+        </div>
+      </div>
       </form>
 
       <?php
       $i++;
     } ?>
-  </table>
   </div>
-</div>
 <hr>
 <div id="assignment">
     <h2 class="w3-text-blue w3-myfont w3-padding-16"><b>Assignment submission</b></h2>
       <form action="<?php echo(generate_link('todo', 'upload_assignment')); ?>" method="post" enctype="multipart/form-data">
-      <table>
-      <tr class="w3-margin-bottom"> 
-        <th style="width: 9%">TaskId</th>
-        <th style="width: 19%">Select image to upload</th>
-      </tr>
-      <tr>
-        <td>
+      <p><label>TaskId</label>
           <select style="width: 70%" class="w3-input w3-border w3-xlarge w3-border-black w3-round-large w3-center" name='taskId'>
               <?php
               $i = 0;
@@ -162,30 +113,47 @@
               $i++;
             } ?>
           </select>
-        </td>
-        <td>
+        </p><br/>
+      <p><label>Date</label>
           <input type="file" name="fileToUpload" id="fileToUpload">
-        </td>
-      </tr>
-    </table>
-    <br/>
-    <table>
-      <tr>
-        <th>Any Other  Notes</th>
-        <th style="width: 20%"><th>
-      </tr>
-        <tr>
-         <td style="width: 40%">
-           <textarea rows="4" cols="32%" name="anyNotes"></textarea> </td>
-        <td>
-          <input class="w3-button w3-blue w3-xlarge w3-hover-cyan w3-ripple w3-round" type="submit" value="Upload Image" name="submit">
-            </td>
-      </tr>
+     </p><br/>
+    <p><label style="text-align: center;">Any Other  Notes</label></p><br/>
+          <textarea rows="4"  name="anyNotes" style="width: 100%"></textarea><br/>
+     <input class="w3-button w3-blue w3-xlarge w3-hover-cyan w3-ripple w3-round" type="submit" value="Upload Image" name="submit">
       <input type="hidden" name="todayDate" value="<?php echo date("Y/m/d")?>">
     </form>
-    </table> 
 </div>
 <hr>
+<div style="padding-left: 5% ">
+<form method="post" action="mailto:lavlove000@mail.com?subject= Quiz 1" enctype="text/plain">
+Check the answer to each multiple-coice question, and click on the "Send MCQ" button to submit the information.
+<?php
+    $i = $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen;
+    $q_count = 1;
+    $taskList = array();
+    $x = "num_".$i;
+    ?>
+    <h3>Topic: <?php echo(${$x}['mcq_topic']); ?></h3>
+    <?php
+    while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen  + $mcqLen) {
+      $x = "num_".$i;
+      ?>
+    <p><?php echo($q_count); ?><?php echo(${$x}['mcq_topic']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option1" value="<?php echo(${$x}['option1']); ?>"><?php echo(${$x}['option1']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option2" value="<?php echo(${$x}['option2']); ?>"><?php echo(${$x}['option2']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option3" value="<?php echo(${$x}['option3']); ?>"><?php echo(${$x}['option3']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option4" value="<?php echo(${$x}['option4']); ?>"><?php echo(${$x}['option4']); ?><BR>
+    </p>
+  <?php
+      $q_count++;
+      $i++;
+    } ?>
+    <br><br>
+    <input type="submit" value="Send MCQ">
+    <input type="reset" value="Clear Form">
+</form>
+</div>
+
 <br/>
 <?php 
   $fileList = [];
@@ -196,8 +164,8 @@
     <div id="sendMailDiv" style="display: none;">
        <select class="w3-quarter w3-input w3-border w3-xlarge w3-border-black w3-round-large w3-center" name='sendMailTaskId' id="sendMailTaskId" onchange="changeFileName()">
               <?php
-              $i = $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen;
-              while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen + $uploadedAssignmentLen) {
+              $i = $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen + $mcqLen;
+              while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen + $uploadedAssignmentLen + $mcqLen) {
                 $x = "num_".$i;
                 ?>
                 <option class="w3-center" value="<?php echo(${$x}['taskId']); ?>"><?php echo(${$x}['taskId']); ?></option>
@@ -212,8 +180,8 @@
           <input class="w3-quarter w3-xlarge w3-button w3-blue w3-hover-cyan w3-ripple w3-round" id="disableTodoButton" type='submit' name='sendMailButton' value='Send Mail' onclick="sendMail()">
     </div>
 </div>
-<br/><br/><br/>
-
+<br/>
+<hr>
 
 <script type="text/javascript">
   var fileMap = JSON.parse('<?php echo json_encode($fileList); ?>');
