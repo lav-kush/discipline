@@ -3,18 +3,21 @@
 		<h2 class="w3-text-blue w3-myfont"><b>ToDo Panel</b></h2><br/>
 
       <form action="<?php echo(generate_link('todo', 'add_todo')); ?>" method="post">
-      <table style="width: 100%">
-      <tr> <td>User Name</td><td>Task</td><td>Date</td>
-      </tr>
-      <tr>
-        <td><input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='user' id="user" onchange="isUserCorrect()" placeholder='user'  required></td>
-        <td><input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='task' onchange="isTaskEntered()" id="task" placeholder='task' required></td>
-        <td>
-          <input class="w3-input w3-border w3-xlarge" style="display: inline" value="<?php echo date("Y/m/d")?>" id = "taskDate"  name='taskDate' placeholder='date' readonly>
-            </td>  
-      </tr></table>
-       From Time: <input class="w3-input w3-border w3-xlarge" type="time" style="width: 33%; display: inline" id="fromTime" name='fromTime' placeholder='fromTime'  required>
-       To Time: <input class="w3-input w3-border w3-xlarge" type="time" style="width: 33%; display: inline" name='toTime' id="toTime" placeholder='toTime'  required onchange="isTimeCorrect()">
+       <p><label>User Name</labe>
+		<input class="w3-mobile w3-input w3-border w3-xlarge w3-border-black w3-round-large" style="width:auto" type='text'  id="user" onchange="isUserCorrect()" placeholder='user'  required>
+        </p><br/>
+       <p><label>Task</label>
+		<input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='task' onchange="isTaskEntered()" id="task" placeholder='task' required>
+        </p><br/>
+        <p><label>Date</label>
+		<input class="w3-input w3-border w3-xlarge" style="display: inline" value="<?php echo date("Y/m/d")?>" id = "taskDate"  name='taskDate' placeholder='date' readonly>
+         </p><br/>
+        <p><label>From Time</label>
+		<input class="w3-input w3-border w3-xlarge" type="time"  id="fromTime" name='fromTime' placeholder='fromTime'  required>
+        </p><br/>
+       <p><label>To Time</label>
+		<input class="w3-input w3-border w3-xlarge" type="time"  name='toTime' id="toTime" placeholder='toTime'  required onchange="isTimeCorrect()">
+        </p><br/>
         <input class="w3-button w3-xlarge w3-blue w3-hover-cyan w3-ripple w3-round" style="float: right"  id="addTodo" type='submit' name='addTodo' value='Add Todo Task' disabled>
     </form>
     <h4 class="w3-red w3-ripple"  style="display:none;" id="todoAddButtonError1" name='todoAddButtonError1' value="Enter User Name">Enter Correct User Name</h4>
@@ -71,6 +74,26 @@
     } ?>
   </table>
   </div>
+<div class="w3-row">
+  <div class="w3-col w3-container m2 l2 w3-yellow">
+    <p>This part .</p>
+  </div>
+  <div class="w3-col w3-container m2 l2">  
+    <p>This part</p>
+  </div>
+  <div class="w3-col w3-container m2 l2 w3-yellow">
+    <p>This .</p>
+  </div>
+  <div class="w3-col w3-container m2 l2">  
+    <p>This </p>
+  </div>
+  <div class="w3-col w3-container m2 l2 w3-yellow">
+    <p>This part .</p>
+  </div>
+  <div class="w3-col w3-container m2 l2">  
+    <p>This part</p>
+  </div>
+</div>
   <div  style="background-color:#bbb;">
     <h2>Lav Todos</h2>
     <table >
@@ -220,6 +243,7 @@ function isAdminCorrect(){
  function isUserCorrect(){
     if(document.getElementById('user').value == null || document.getElementById('user').value=='' || !(document.getElementById('user').value =='shivam' || document.getElementById('user').value =='vishnu')){
     document.getElementById('todoAddButtonError1').style.display = 'block';
+    document.getElementById('addTodo').disabled  = true;
     return false;
     }
      document.getElementById('todoAddButtonError1').style.display = 'none';
@@ -228,6 +252,7 @@ function isAdminCorrect(){
   function isTaskEntered(){
     if(document.getElementById('task').value == null || document.getElementById('task').value ==''){
     document.getElementById('todoAddButtonError2').style.display = 'block';
+    document.getElementById('addTodo').disabled  = true;
     return false;
     }
      document.getElementById('todoAddButtonError2').style.display = 'none';
@@ -240,6 +265,6 @@ function isTimeCorrect() {
     document.getElementById('addTodo').disabled  = false;
     // alert(document.getElementById('addTodo'));
   }else{
-    document.getElementById('addTodo').disabled  = false;
+    document.getElementById('addTodo').disabled  = true;
   }
 }</script>

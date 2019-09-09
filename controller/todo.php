@@ -16,7 +16,7 @@
             while($i < count($data_completed_todos)) {
                 if($data_completed_todos[$i]['user'] == 'shivam'){
                     array_push($shivamCompletedTaskList, $data_completed_todos[$i]);
-                }else{
+                }elseif($data_completed_todos[$i]['user'] == 'vishnu'){
                     array_push($lavKushCompletedTaskList, $data_completed_todos[$i]);
                 }
                 $i = $i + 1;
