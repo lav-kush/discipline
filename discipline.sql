@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2019 at 07:36 PM
+-- Generation Time: Sep 09, 2019 at 06:24 PM
 -- Server version: 10.1.40-MariaDB
 -- PHP Version: 7.3.5
 
@@ -44,6 +44,50 @@ INSERT INTO `banner` (`c_id`, `image`, `message`, `link`) VALUES
 (2, 'banner2.jpg', ' Are You Ready To Give Flight To Your Dreams. Dream is not that which you see while sleeping. It is something that doesn\'t let you sleep...', 'http://localhost/main/home/'),
 (0, 'banner3.jpg', 'hi lav', 'http://localhost/main/home/'),
 (0, 'banner7.jpg', 'banner7 msg', 'http://localhost/main/home/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mcq`
+--
+
+CREATE TABLE `mcq` (
+  `mcq_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `status` int(11) NOT NULL,
+  `mcq_topic` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mcq`
+--
+
+INSERT INTO `mcq` (`mcq_id`, `date`, `status`, `mcq_topic`) VALUES
+(1, '2019-09-09', 0, 'c mcq');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mcq_q`
+--
+
+CREATE TABLE `mcq_q` (
+  `mcq_id` int(11) NOT NULL,
+  `mcq_question` varchar(100) NOT NULL,
+  `correct_option` int(11) NOT NULL,
+  `option1` varchar(200) NOT NULL,
+  `option2` varchar(200) NOT NULL,
+  `option3` varchar(200) NOT NULL,
+  `option4` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `mcq_q`
+--
+
+INSERT INTO `mcq_q` (`mcq_id`, `mcq_question`, `correct_option`, `option1`, `option2`, `option3`, `option4`) VALUES
+(1, 'hi lav!', 1, '1', '2', '3', '4'),
+(1, 'hi lav1!', 6, '5', '6', '7', '8');
 
 -- --------------------------------------------------------
 
@@ -166,9 +210,13 @@ CREATE TABLE `todo` (
 --
 
 INSERT INTO `todo` (`taskId`, `user`, `task`, `date`, `fromTime`, `toTime`, `status`) VALUES
-(1, 'shivam', 'shivam', '0000-00-00', '00:58:00', '23:58:00', 0),
-(2, 'lav', 'lav', '2019-08-27', '12:58:00', '12:58:00', 0),
-(3, 'lav1', 'lav1', '2019-08-27', '23:59:00', '12:59:00', 1);
+(1, 'shivam', 'shivam', '2019-08-31', '00:58:00', '23:58:00', 1),
+(2, 'lav', 'lav', '2019-08-31', '12:58:00', '12:58:00', 1),
+(3, 'shivam', 'shivam1', '2019-08-31', '23:59:00', '12:59:00', 0),
+(4, 'lav', 'lav1', '0000-00-00', '00:00:00', '00:00:00', 0),
+(5, 'shivam', 'task infinity', '2019-09-09', '10:59:00', '12:00:00', 1),
+(6, 'vishnu', 'task powershell', '2019-09-09', '23:59:00', '12:59:00', 1),
+(7, 'shivam', 'task todo', '2019-09-01', '00:57:00', '12:59:00', 1);
 
 -- --------------------------------------------------------
 
@@ -180,8 +228,21 @@ CREATE TABLE `uploaded` (
   `uploadedId` int(11) NOT NULL,
   `taskId` int(11) NOT NULL,
   `fileName` varchar(64) NOT NULL,
-  `todayDate` datetime NOT NULL
+  `todayDate` datetime NOT NULL,
+  `anyNotes` varchar(400) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `uploaded`
+--
+
+INSERT INTO `uploaded` (`uploadedId`, `taskId`, `fileName`, `todayDate`, `anyNotes`) VALUES
+(48, 2, 'lav_kush.jpg', '2019-08-31 00:00:00', 'hi lav!'),
+(49, 1, 'lav_kush1.jpg', '2019-08-31 00:00:00', 'hi dkjdhJKSDBgdkNSN SHDVsdj SHDVBsd text'),
+(50, 6, 'lav_img.jpg', '2019-09-01 00:00:00', 'new assignment'),
+(51, 4, 'lav_img.jpg', '2019-09-01 00:00:00', 'done finally'),
+(52, 4, 'avatar_hat.jpg', '2019-09-01 00:00:00', 'test'),
+(53, 4, 'avatar_hat.jpg', '2019-09-01 00:00:00', 'test');
 
 -- --------------------------------------------------------
 
@@ -224,6 +285,18 @@ ALTER TABLE `banner`
   ADD KEY `c_id` (`c_id`);
 
 --
+-- Indexes for table `mcq`
+--
+ALTER TABLE `mcq`
+  ADD PRIMARY KEY (`mcq_id`);
+
+--
+-- Indexes for table `mcq_q`
+--
+ALTER TABLE `mcq_q`
+  ADD PRIMARY KEY (`mcq_id`,`mcq_question`) USING BTREE;
+
+--
 -- Indexes for table `notice`
 --
 ALTER TABLE `notice`
@@ -264,8 +337,7 @@ ALTER TABLE `todo`
 -- Indexes for table `uploaded`
 --
 ALTER TABLE `uploaded`
-  ADD PRIMARY KEY (`uploadedId`),
-  ADD UNIQUE KEY `taskId` (`taskId`);
+  ADD PRIMARY KEY (`uploadedId`);
 
 --
 -- Indexes for table `user`
@@ -280,6 +352,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `mcq`
+--
+ALTER TABLE `mcq`
+  MODIFY `mcq_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -303,13 +381,13 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `todo`
 --
 ALTER TABLE `todo`
-  MODIFY `taskId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `taskId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `uploaded`
 --
 ALTER TABLE `uploaded`
-  MODIFY `uploadedId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `uploadedId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -320,6 +398,13 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `mcq_q`
+--
+ALTER TABLE `mcq_q`
+  ADD CONSTRAINT `mcq_id_foreign_key` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`mcq_id`),
+  ADD CONSTRAINT `mcq_q_ibfk_1` FOREIGN KEY (`mcq_id`) REFERENCES `mcq` (`mcq_id`);
 
 --
 -- Constraints for table `teacher`
