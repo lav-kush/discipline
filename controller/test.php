@@ -10,19 +10,26 @@
         }
         function home() {
             $data_mcq= loadModel("test", "fetch_today_mcq");
-            loadView('todos_header', array_merge($this->data, ['header' => 'Test','title' => 'Test - Discipline']));
-            loadView('test', array_merge($data_mcq, ['mcqLen' => count($data_mcq) ]));
+            $marks = $end_time = -1;
+            if (!empty ($data_mcq)){
+                $marks =  $data_mcq[0]['last_test_marks'];
+                $end_time = $data_mcq[0]['end_time'];
+            }
+            loadView('todos_header', array_merge($this->data, ['header' => 'Test','title' => 'Test - Discipline', 'marks'=>$marks]));
+            loadView('test', array_merge($data_mcq, ['mcqLen' => count($data_mcq), 'end_time'=>$end_time ]));
             loadView('footer');
         }
 
         function save_ans($arguments) {
-            $result= loadModel("test", "save_ans", $arguments);
-            if ($result === false) {
-                print('Some Error Occured<br/>Please Try Again');
-                loadView('error', ['msg' => 'Some Error Occured']);
+            $marks= loadModel("test", "save_ans", $arguments);
+            if ($marks==0) {
+                print("You haven't attempted any question<br/>Please Try Again");
+                redirect_sleep('test', 'home', 2);
                 exit();
             }
-            redirect('todo', 'home');
+            echo ('Test Completed');
+            echo ('Total Marks '.$marks);
+            redirect_sleep('todo', 'home', 3);
             exit();
         }
     }
