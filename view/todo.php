@@ -124,6 +124,7 @@
     </form>
 </div>
 <hr>
+<?php if($mcqLen > 0){ ?>
 <div style="padding-left: 5% ">
 <form method="post" action="mailto:lavlove000@mail.com?subject= Quiz 1" enctype="text/plain">
 Check the answer to each multiple-coice question, and click on the "Send MCQ" button to submit the information.
@@ -135,14 +136,15 @@ Check the answer to each multiple-coice question, and click on the "Send MCQ" bu
     ?>
     <h3>Topic: <?php echo(${$x}['mcq_topic']); ?></h3>
     <?php
+    $i = $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen;
     while($i < $shivamCompletedTodosLen + $shivamTodoLen + $lavTodoLen + $lavCompletedTodosLen  + $mcqLen) {
       $x = "num_".$i;
       ?>
-    <p><?php echo($q_count); ?><?php echo(${$x}['mcq_topic']); ?><BR>
-    <input type="radio" name="q_<?php echo($count); ?>_option1" value="<?php echo(${$x}['option1']); ?>"><?php echo(${$x}['option1']); ?><BR>
-    <input type="radio" name="q_<?php echo($count); ?>_option2" value="<?php echo(${$x}['option2']); ?>"><?php echo(${$x}['option2']); ?><BR>
-    <input type="radio" name="q_<?php echo($count); ?>_option3" value="<?php echo(${$x}['option3']); ?>"><?php echo(${$x}['option3']); ?><BR>
-    <input type="radio" name="q_<?php echo($count); ?>_option4" value="<?php echo(${$x}['option4']); ?>"><?php echo(${$x}['option4']); ?><BR>
+    <p><?php echo($q_count); ?>.<pre> <?php echo(${$x}['mcq_question']); ?></pre><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option1" value="<?php echo(${$x}['option1']); ?>">  <?php echo(${$x}['option1']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option2" value="<?php echo(${$x}['option2']); ?>">  <?php echo(${$x}['option2']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option3" value="<?php echo(${$x}['option3']); ?>">  <?php echo(${$x}['option3']); ?><BR>
+    <input type="radio" name="q_<?php echo($count); ?>_option4" value="<?php echo(${$x}['option4']); ?>">  <?php echo(${$x}['option4']); ?><BR>
     </p>
   <?php
       $q_count++;
@@ -153,9 +155,12 @@ Check the answer to each multiple-coice question, and click on the "Send MCQ" bu
     <input type="reset" value="Clear Form">
 </form>
 </div>
+<?php   } else{ ?>
+	<h3> No Test For Today!</h3><hr>
+<?php  } ?>
 
 <br/>
-<?php 
+<?php
   $fileList = [];
 ?>
 <div>
@@ -169,7 +174,7 @@ Check the answer to each multiple-coice question, and click on the "Send MCQ" bu
                 $x = "num_".$i;
                 ?>
                 <option class="w3-center" value="<?php echo(${$x}['taskId']); ?>"><?php echo(${$x}['taskId']); ?></option>
-              <?php 
+              <?php
               $fileList [ ${$x}['taskId'] ] = ${$x}['fileName'];
               $i++;
             } ?>
