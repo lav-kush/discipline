@@ -51,7 +51,7 @@
 			<div class="banner_header_top_wthree">
 				<div class="agileits-logo">
 					<!-- <img src="<?php echo(IMAGE_PATH); ?>logo1.jpg" style="width:8%;height:16%; margin: 	0 0 0 5%;" align="left"> -->
-					<h1 style="margin-right:17%;"><a href="<?php echo(generate_link('todo', 'home')); ?>"><i class="fa" aria-hidden="true"></i> Todo Task</a></h1>
+					<h1 style="margin-right:17%;"><a href="<?php echo(generate_link('todo', 'home')); ?>"><i class="fa" aria-hidden="true"></i> <?php echo($header); ?></a></h1>
 				</div>
 		</div>
 	</div>

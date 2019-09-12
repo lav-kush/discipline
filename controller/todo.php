@@ -36,7 +36,7 @@
                 $i = $i + 1;
             }
             $data_uploaded_assignment= loadModel("todo", "fetch_uploaded_assignment");
-           loadView('todos_header', array_merge($this->data, ['todoLen' => count($data_todo), 'title' => 'Todo - Discipline']));
+           loadView('todos_header', array_merge($this->data, ['header' => 'TODO TASK', 'title' => 'Todo - Discipline']));
             loadView('todo', array_merge($shivamCompletedTaskList, $shivamTaskList, $lavKushCompletedTaskList, $lavKushTaskList, $data_mcq, $data_uploaded_assignment, ['shivamCompletedTodosLen' => count($shivamCompletedTaskList), 'lavCompletedTodosLen' => count($lavKushCompletedTaskList), 'shivamTodoLen' => count($shivamTaskList), 'lavTodoLen' => count($lavKushTaskList), 'uploadedAssignmentLen' => count($data_uploaded_assignment), 'mcqLen' => count($data_mcq) ]));
             loadView('footer');
         }
