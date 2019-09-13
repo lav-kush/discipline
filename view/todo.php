@@ -160,7 +160,7 @@ Check the answer to each multiple-coice question, and click on the "Send MCQ" bu
 </form>
 </div> -->
 <?php   } else{ ?>
-	<h3> No Test For Today!</h3><hr>
+	<h3> No Test For Today!</h3> Next Test On Saturday from 10AM to 8 PM<hr>
 <?php  } ?>
 </h2>
 <br/>

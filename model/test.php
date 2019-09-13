@@ -31,7 +31,7 @@
             $sql = "SELECT * FROM `mcq_q` AS ques INNER JOIN `mcq` as test ON test.mcq_id=ques.mcq_id WHERE  test.status = 0 and test.start_time <= '".$current_time."' and test.end_time >= '".$current_time."' and test.date = '".$todayDate."' ORDER BY ques.mcq_question, ques.option1";
             $results = query($this->db, $sql);
             mysqli_commit($this->db);
-            $marks = 0;
+            $marks = -1;
             $mcq_id = 0;
 
             mysqli_autocommit($this->db, TRUE);
@@ -46,8 +46,8 @@
                     }
                 }
             }
-            if($marks){
-                $sql = "UPDATE `mcq` SET `status` = 1 and last_test_marks = '".$marks."' WHERE mcq_id = '".$mcq_id."' " ;
+            if($marks > 0 ){
+                $sql = "UPDATE `mcq` SET `status` = 1, last_test_marks = '".$marks."' WHERE mcq_id = '".$mcq_id."' " ;
                 query($this->db, $sql);
             }
             mysqli_commit($this->db);

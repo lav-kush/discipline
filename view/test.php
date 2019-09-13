@@ -9,10 +9,9 @@ if($end_time != -1){
   $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24)); 
   $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
   $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24  - $hours*60*60)/ 60);
-  $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));  
-}
+  $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
 ?>
-<h4> Left Time <?php echo ($hours.'Hr:'.$minutes.'Min: '.$seconds.'Sec'); ?></h4>
+<h4> Left Time <?php echo ($hours.'Hr:'.$minutes.'Min: '.$seconds.'Sec'); }?></h4>
 <?php if($mcqLen > 0){ ?>
 <div style="padding-left: 5% ">
 <!--mailto:lavlove000@mail.com?subject= Quiz 1;   -->
@@ -47,10 +46,10 @@ if($end_time != -1){
 </form>
 </div>
 <?php   } else{ ?>
-  <br/><br/>
+  <br/><br/><br/><br/>
 	<h3 style="text-align: center"> No Test For Today!</h3>
   <h4 style="text-align: center">Enjoy!</h4><hr>
 <?php  } ?>
-<br/><br/>
+<br/><br/><br/><br/>
 <br/>
 <hr>

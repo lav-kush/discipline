@@ -22,14 +22,18 @@
 
         function save_ans($arguments) {
             $marks= loadModel("test", "save_ans", $arguments);
-            if ($marks==0) {
+            if ($marks==-1) {
                 print("You haven't attempted any question<br/>Please Try Again");
                 redirect_sleep('test', 'home', 2);
                 exit();
             }
-            echo ('Test Completed');
-            echo ('Total Marks '.$marks);
-            redirect_sleep('todo', 'home', 3);
+           if ($marks==0) {
+                print("You have scored 0 Marks<br/>Please Try Again");
+                redirect_sleep('test', 'home', 2);
+                exit();
+            }
+            echo ('Test Completed <br/> Total Marks '.$marks);
+            redirect_sleep('todo', 'home', 8);
             exit();
         }
     }

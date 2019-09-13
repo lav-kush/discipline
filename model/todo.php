@@ -60,7 +60,7 @@
             db_close($this->db);
             return $result;
         }
-        
+
         function upload_assignment($arguments){
             $fileName =  explode("~", implode("~", $arguments['fileToUpload']))[0];
             mysqli_autocommit($this->db, TRUE);
@@ -146,7 +146,6 @@
             mysqli_autocommit($this->db, TRUE);
             $sql = "SELECT * FROM `mcq_q` AS ques INNER JOIN `mcq` as test ON test.mcq_id=ques.mcq_id WHERE  test.status = 0 and test.start_time <= '".$current_time."' and test.end_time >= '".$current_time."' and test.date = '".$todayDate."'";
             $result = query($this->db, $sql);
-            print_r($current_time > $result[0]['end_time']);
             mysqli_commit($this->db);
             db_close($this->db);
             return $result;
